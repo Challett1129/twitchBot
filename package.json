@@ -7,7 +7,6 @@
   "description": "I know enough about javascript that I thought I'd customize my bot a bit to give it some personality.\r     If you are seeing this and aren't from my stream I'd really appreciate a follow!\r     Feel free to use this repo if you are curious or make any pull requests if you feel inclined to do so.",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
