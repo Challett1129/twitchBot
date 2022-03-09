@@ -1,51 +1,39 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
 
+const regexpCommand = new RegExp(/^!([a-zA-Z0-9]+)(?:\W+)?(.*)?/);
+
 // Define configuration options
-// const opts = {
-//   identity: {
-//     username: BOT_USERNAME,
-//     password: OAUTH_TOKEN
-//   },
-//   channels: [
-//     CHANNEL_NAME
-//   ]
-// };
+const tmiConfig = {
+  identity: {
+    username: process.env.BOT_USERNAME,
+    password: process.env.OAUTH_TOKEN
+  },
+  channels: [
+    'sgt_xenas'
+  ],
+  connection: {
+    reconnect: true
+  }
+};
 
 // Create a client with our options
-const client = new tmi.client({
-    channels:['clancy_b0t']
-});
+const client = new tmi.client(tmiConfig);
 
 // Register our event handlers (defined below)
-client.on('message', (channel, tags, message, self) => {
-    console.log(tags);
-    console.log(`${tags['display-name']}: ${message} `)
-});
+client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
 
 // Connect to Twitch:
 client.connect();
 
 // Called every time a message comes in
-// function onMessageHandler (target, context, msg, self, tags) {
-//   if (self) { return; } // Ignore messages from the bot
+function onMessageHandler (target, context, msg, self) {
+  if (self) return // Ignore messages from the bot
 
-//   console.log(`${tags['display-name']}: ${message}`)
-
-//   // Remove whitespace from chat message
-//   const commandName = msg.trim();
-
-//   // If the command is known, let's execute it
-//   if (commandName === '!dice') {
-//     const num = rollDice();
-//     console.log(context);
-//     client.say(target, `You rolled a ${num}`);
-//     console.log(`* Executed ${commandName} command`);
-//   } else {
-//     console.log(`* Unknown command ${commandName}`);
-//   }
-// }
+  const [raw, command, argument]
+  console.log(`${context.username}: ${msg}`)
+}
 
 // Function called when the "dice" command is issued
 function rollDice () {
