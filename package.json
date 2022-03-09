@@ -1,0 +1,25 @@
+{
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "tmi.js": "^1.8.5"
+  },
+  "name": "twitchbot",
+  "description": "I know enough about javascript that I thought I'd customize my bot a bit to give it some personality.\r     If you are seeing this and aren't from my stream I'd really appreciate a follow!\r     Feel free to use this repo if you are curious or make any pull requests if you feel inclined to do so.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Challett1129/twitchBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Challett1129/twitchBot/issues"
+  },
+  "homepage": "https://github.com/Challett1129/twitchBot#readme"
+}
