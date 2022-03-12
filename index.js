@@ -17,16 +17,25 @@ const tmiConfig = {
   }
 };
 
+const helloResponses = [`( ⓛ ω ⓛ✧)>~ Heya!~`, `nice to finally meowchya, GET IT?`, `hi, I'm ${process.env.BOT_USERNAME} and I like to eat carpet sometimes.`, `hiya, do you like the taste of ankles? I love the taste of ankles ( ⓛ ω ⓛ✧)>~`, ]
+
 const commands = {
   donate: {
-    response: `https://www.paypal.com/paypalme/sgtxenas any and all donations go to further the stream or support paying the bills`
+    response: `https://www.paypal.com/paypalme/sgtxenas any and all donations go to further the stream or support paying the bills. My roommate appreciates any support immensely! ( ⓛ ω ⓛ✧)>~`
   },
   dice: {
     response: (user) => `${user} rolled ${value = rollDice()}`
   },
   clancy: {
-    response: `Hello! I am clancy_b0t, the chatbot inspired by sgt_xenas' cat. I like to chew ankles and help out the stream!`
+    response: (user) => `Hello! I am ${process.env.BOT_USERNAME}, the chatbot inspired by Collin's cat. I like to byte ankles and help out the stream! ( ⓛ ω ⓛ✧)>~.`
+  },
+  hello: {
+    response: (user) => {
+      let i = (Math.floor(Math.random() * helloResponses.length));
+      return `@${user}, ${helloResponses[i]}`
+    }
   }
+
 }
 
 // Create a client with our options
@@ -42,15 +51,19 @@ client.connect();
 client.on('message', (channel, tags, message, self) => {
   if ( self ) return;
   if(message.charAt(0) === '!') {
-    const [raw, command, argument] = message.match(regexpCommand)
+      try{
+        const [raw, command, argument] = message.match(regexpCommand)
   
-    const { response } = commands[command] || {}
-  
-    if( typeof response === 'function') {
-      client.say(channel, response(tags.username))
-    } else if (typeof response === 'string') {
-      client.say(channel, response);
-    }
+        const { response } = commands[command] || {}
+      
+        if( typeof response === 'function') {
+          client.say(channel, response(tags.username))
+        } else if (typeof response === 'string') {
+          client.say(channel, response);
+        }
+      } catch {
+        client.say(channel, `What the heck? Oh..You tried an invalid command! ( ⓛ ω ⓛ✧)>~`)
+      }
   }
 })
 
